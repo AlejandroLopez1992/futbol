@@ -15,7 +15,7 @@ RSpec.describe StatTracker do
     @stat_tracker = StatTracker.from_csv(@locations)
   end
   
-  describe 'initialize' do
+  describe '#initialize' do
     it 'exists' do
       expect(@stat_tracker).to be_an_instance_of StatTracker
     end
@@ -28,7 +28,6 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.processed_games_data(@locations)).to all(be_a(Game))
     end
 
-
     it 'can parse data into a string of objects' do
       expect(@stat_tracker.games).to be_a(Array)
       expect(@stat_tracker.games).to all(be_a(Game))
@@ -38,19 +37,19 @@ RSpec.describe StatTracker do
     end
   end
 
-  describe 'percentage_home_wins' do
+  describe '#percentage_home_wins' do
     it 'float of home teams that have won games' do
       expect(@stat_tracker.percentage_home_wins).to eq(0.44)
     end 
   end  
 
-  describe 'percentage_visitor_wins' do
+  describe '#percentage_visitor_wins' do
     it 'float of visitor teams that have won games' do
       expect(@stat_tracker.percentage_visitor_wins).to eq(0.36)
     end 
   end  
 
-  describe 'percentage_ties' do
+  describe '#percentage_ties' do
     it 'float of teams that tied games' do
       expect(@stat_tracker.percentage_ties).to eq(0.20)
     end 
@@ -77,6 +76,17 @@ RSpec.describe StatTracker do
   describe '#count_of_teams' do
     it '#count_of_teams' do
       expect(@stat_tracker.count_of_teams).to eq 32
+    end
+  end
+
+  describe '#winningest_coach' do
+    it 'coach with best win percentage for each season' do
+      expect(@stat_tracker.winningest_coach("20122013")).to eq "Claude Julien"
+      expect(@stat_tracker.winningest_coach("20132014")).to eq "Claude Julien"
+      expect(@stat_tracker.winningest_coach("20142015")).to eq "Alain Vigneault"
+      # expect(@stat_tracker.winningest_coach("20152016"))
+      # expect(@stat_tracker.winningest_coach("20162017"))
+      # expect(@stat_tracker.winningest_coach("20172018"))
     end
   end
 end
