@@ -7,7 +7,6 @@ class Season
     @raw_games = games
     @raw_game_teams = game_teams
     @season_data = create_season_data(@raw_games, @raw_game_teams)
-    @team_ids = create_teams
   end
     
   def create_season_data(raw_games, raw_game_teams)
@@ -19,9 +18,5 @@ class Season
     team_ids = season_game_teams.map{|game_team| game_team.team_id}.uniq
 
     season_data = {:games=>season_games, :game_teams=>season_game_teams, :team_ids=>team_ids}
-  end
-
-  def create_teams
-    
   end
 end
